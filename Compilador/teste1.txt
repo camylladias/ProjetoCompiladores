@@ -1,0 +1,11 @@
+inteiro x = 2;
+leia(x);
+imprime("teste");
+x = (1+1)+a2;
+se(teste == y){leia(x);} senao{imprime("teste");}
+para(x = 5; x>3;i++){leia(x);}
+enquanto( teste > chales){x = (1+1)+a2;}
+
+ajustar o leia para não sair a variavel no fim
+como fazer para sair tudo em um bloco só
+como traduzir a recursão
