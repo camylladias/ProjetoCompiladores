@@ -26,8 +26,7 @@ public class tradutor  extends atribuicaoBaseListener{
         System.out.println("      Scanner scanner = new Scanner(System.in);");
         System.out.print("      String ");
         exitCmdLeia();
-        ctx.id();
-        
+        ctx.id();   
     }
     
 
