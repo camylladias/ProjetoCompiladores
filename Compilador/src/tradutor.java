@@ -18,15 +18,14 @@ public class tradutor  extends atribuicaoBaseListener{
     }
 
     public void exitCmdLeia(atribuicaoBaseListener.CmdLeiaContext ctx){
-        System.out.println("\n ");
+        System.out.println("= scanner.next();\n ");
     }
     
     @Override 
     public void enterCmdLeia(atribuicaoParser.CmdLeiaContext ctx) { 
         System.out.println("      Scanner scanner = new Scanner(System.in);");
-        enterId();
+        System.out.print("      String ");
         exitCmdLeia();
-        System.out.print(" = scanner.next();");
         ctx.id();
         
     }
