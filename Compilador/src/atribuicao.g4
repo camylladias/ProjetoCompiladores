@@ -4,7 +4,7 @@ init: cmd+;
 
 cmd: cmdAtribui | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto;
 
-cmdAtribui:tipo id operadorAtri (id|numero) fim;
+cmdAtribui: tipo id operadorAtri (id|numero) fim;
 
 cmdLeia: 'leia' leftParen id rightParen fim;
 
@@ -12,7 +12,7 @@ cmdImprime: 'imprime' leftParen (texto|id) rightParen fim;
 
 cmdExpressao: id operadorAtri expressao fim;
 
-cmdSe: 'se' leftParen expressao comparador expressao rightParen '{' cmd+ '} senao{'cmd+'}';
+cmdSe: 'se' leftParen expressao comparador expressao rightParen '{' cmd+ '}' senao '{' cmd+ '}';
 
 cmdPara: 'para' leftParen id '=' numero ';' id comparador numero ';' id '++' rightParen '{' cmd+'}';
 
