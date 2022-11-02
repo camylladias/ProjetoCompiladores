@@ -1,13 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-//package compilador;
-
-/**
- *
- * @author unifgversolato
- */
 public class tradutor  extends atribuicaoBaseListener{
     
     @Override 
@@ -26,11 +16,17 @@ public class tradutor  extends atribuicaoBaseListener{
         System.out.println("\n  }");
         System.out.println("\n}");   
     }
+
+    public void exitCmdLeia(atribuicaoBaseListener.CmdLeiaContext ctx){
+        System.out.println("\n ");
+    }
     
     @Override 
     public void enterCmdLeia(atribuicaoParser.CmdLeiaContext ctx) { 
         System.out.println("      Scanner scanner = new Scanner(System.in);");
-        System.out.print("      String " + ctx.id().getText() + " = scanner.next();");
+        enterId();
+        exitCmdLeia();
+        System.out.print(" = scanner.next();");
         ctx.id();
         
     }
