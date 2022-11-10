@@ -2,40 +2,58 @@ grammar atribuicao;
 
 init: cmd+;
 
-cmd: cmdAtribui | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto;
+cmd: cmdAtribui | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto | cmdSenao;
 
-cmdAtribui: tipo id operadorAtri (id|numero) fim;
+cmdAtribui: tipo id operadorAtri (id|numero|texto|booleano) fim;
 
-cmdLeia: 'leia' leftParen id rightParen fim;
+cmdLeia: 'leia(' id ')' complementoLeia fim;
+
+complementoLeia: | |;
 
 cmdImprime: 'imprime' leftParen (texto|id) rightParen fim;
 
-cmdExpressao: id operadorAtri expressao fim;
+cmdExpressao: expr fim;
 
-cmdSe: 'se' leftParen expressao comparador expressao rightParen '{' cmd+ '}' senao '{' cmd+ '}';
+cmdSe: 'se' leftParen expressao (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expressao rightParen leftChave cmd+ rightChave cmdSenao?;
 
-cmdPara: 'para' leftParen id '=' numero ';' id comparador numero ';' id '++' rightParen '{' cmd+'}';
+cmdSenao: 'senao' leftChave cmd+ rightChave ;
 
-cmdEnquanto: 'enquanto' leftParen expressao comparador expressao rightParen '{'cmd+'}';
+cmdPara: 'para' leftParen tipo id operadorAtri numero fim id (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) numero fim expr rightParen leftChave cmd+ rightChave;
+
+cmdEnquanto: 'enquanto' leftParen ((expr (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expr)| booleano) rightParen leftChave cmd+ rightChave;
 
 tipo: 'booleano' | 'inteiro' | 'flutuante' | 'palavra';
-operadorMat: '+' | '-' | '*' | '/' ; 
 operadorAtri: '=';
 fim: ';' ;
-comparador: '==' | '<' | '>' | '<=' | '>=' | '!=';
-numero: NUM;
-NUM: [0-9]+;
+compIgual: '==';
+compMaior: '>';
+compMenor: '<';
+compMeIgual: '<=';
+compMaIgual: '>=';
+compDifer: '!=';
+numero: NUMINT | NUMFLOAT;
+NUMINT: [0-9]+;
+NUMFLOAT: [0-9]+ '.'? [0-9]+;
+booleano: BOOLEANOtrue|BOOLEANOfalse;
+BOOLEANOtrue:  'True';
+BOOLEANOfalse: 'False';
 id: ID;
 ID: [a-zA-Z0-9]+;
 texto: TEXTO; 
 TEXTO:'"' [a-zA-Z0-9]+ '"';
 leftParen: '(';
 rightParen: ')';
+leftChave: '{';
+rightChave: '}';
+plus: '+';
+menus: '-';
+div: '/';
+mult: '*';
+expr: id operadorAtri expressao;
 expressao: termo expreLinha;
 termo: fator termoLinha;
-expreLinha: '+' termo expreLinha | '-' termo expreLinha | |;
+expreLinha: plus termo expreLinha | menus termo expreLinha | |;
 fator: numero | id | leftParen expressao rightParen;
-termoLinha: '*' fator termoLinha | '/' fator termoLinha | |;
+termoLinha: mult fator termoLinha | div fator termoLinha | |;
 
 Ws:[ \t\r\n]+ -> skip;
-
