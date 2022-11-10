@@ -64,6 +64,18 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCmdImprime(atribuicaoParser.CmdImprimeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -95,6 +107,18 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdSe(atribuicaoParser.CmdSeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdSenao(atribuicaoParser.CmdSenaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdSenao(atribuicaoParser.CmdSenaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -136,18 +160,6 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperadorMat(atribuicaoParser.OperadorMatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOperadorMat(atribuicaoParser.OperadorMatContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterOperadorAtri(atribuicaoParser.OperadorAtriContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -172,13 +184,73 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparador(atribuicaoParser.ComparadorContext ctx) { }
+	@Override public void enterCompIgual(atribuicaoParser.CompIgualContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparador(atribuicaoParser.ComparadorContext ctx) { }
+	@Override public void exitCompIgual(atribuicaoParser.CompIgualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompMaior(atribuicaoParser.CompMaiorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompMaior(atribuicaoParser.CompMaiorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompMenor(atribuicaoParser.CompMenorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompMenor(atribuicaoParser.CompMenorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompMeIgual(atribuicaoParser.CompMeIgualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompMeIgual(atribuicaoParser.CompMeIgualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompMaIgual(atribuicaoParser.CompMaIgualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompMaIgual(atribuicaoParser.CompMaIgualContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompDifer(atribuicaoParser.CompDiferContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompDifer(atribuicaoParser.CompDiferContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -191,6 +263,18 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumero(atribuicaoParser.NumeroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBooleano(atribuicaoParser.BooleanoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleano(atribuicaoParser.BooleanoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -239,6 +323,90 @@ public class atribuicaoBaseListener implements atribuicaoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRightParen(atribuicaoParser.RightParenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLeftChave(atribuicaoParser.LeftChaveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLeftChave(atribuicaoParser.LeftChaveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRightChave(atribuicaoParser.RightChaveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRightChave(atribuicaoParser.RightChaveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPlus(atribuicaoParser.PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlus(atribuicaoParser.PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMenus(atribuicaoParser.MenusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMenus(atribuicaoParser.MenusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDiv(atribuicaoParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDiv(atribuicaoParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMult(atribuicaoParser.MultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMult(atribuicaoParser.MultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpr(atribuicaoParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr(atribuicaoParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

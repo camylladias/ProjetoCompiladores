@@ -28,6 +28,8 @@ public class tradutor  extends atribuicaoBaseListener{
         }
       return espacos;  
     }
+
+
     
     public void AumentarControleDicionario(String comando_nome){
         int qnd_exec=parseInt(this.controle_espacos.get(comando_nome).toString());
@@ -240,6 +242,13 @@ public class tradutor  extends atribuicaoBaseListener{
         //
     }
     
+    @Override 
+    
+    public void exitCmdAtribui(atribuicaoParser.CmdAtribuiContext ctx){
+       System.out.println(ctx.id(0).getText());
+        
+       System.out.println(ctx.tipo().getText());
+     }
     @Override 
     public void enterTexto(atribuicaoParser.TextoContext ctx) { 
         System.out.print(ctx.TEXTO().getText());

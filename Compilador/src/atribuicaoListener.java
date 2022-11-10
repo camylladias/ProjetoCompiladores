@@ -47,6 +47,16 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 */
 	void exitCmdLeia(atribuicaoParser.CmdLeiaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#complementoLeia}.
+	 * @param ctx the parse tree
+	 */
+	void enterComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#complementoLeia}.
+	 * @param ctx the parse tree
+	 */
+	void exitComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#cmdImprime}.
 	 * @param ctx the parse tree
 	 */
@@ -76,6 +86,16 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdSe(atribuicaoParser.CmdSeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#cmdSenao}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdSenao(atribuicaoParser.CmdSenaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#cmdSenao}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdSenao(atribuicaoParser.CmdSenaoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#cmdPara}.
 	 * @param ctx the parse tree
@@ -107,16 +127,6 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 */
 	void exitTipo(atribuicaoParser.TipoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link atribuicaoParser#operadorMat}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperadorMat(atribuicaoParser.OperadorMatContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link atribuicaoParser#operadorMat}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperadorMat(atribuicaoParser.OperadorMatContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#operadorAtri}.
 	 * @param ctx the parse tree
 	 */
@@ -137,15 +147,65 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 */
 	void exitFim(atribuicaoParser.FimContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link atribuicaoParser#comparador}.
+	 * Enter a parse tree produced by {@link atribuicaoParser#compIgual}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparador(atribuicaoParser.ComparadorContext ctx);
+	void enterCompIgual(atribuicaoParser.CompIgualContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link atribuicaoParser#comparador}.
+	 * Exit a parse tree produced by {@link atribuicaoParser#compIgual}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparador(atribuicaoParser.ComparadorContext ctx);
+	void exitCompIgual(atribuicaoParser.CompIgualContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#compMaior}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompMaior(atribuicaoParser.CompMaiorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#compMaior}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompMaior(atribuicaoParser.CompMaiorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#compMenor}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompMenor(atribuicaoParser.CompMenorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#compMenor}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompMenor(atribuicaoParser.CompMenorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#compMeIgual}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompMeIgual(atribuicaoParser.CompMeIgualContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#compMeIgual}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompMeIgual(atribuicaoParser.CompMeIgualContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#compMaIgual}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompMaIgual(atribuicaoParser.CompMaIgualContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#compMaIgual}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompMaIgual(atribuicaoParser.CompMaIgualContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#compDifer}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompDifer(atribuicaoParser.CompDiferContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#compDifer}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompDifer(atribuicaoParser.CompDiferContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#numero}.
 	 * @param ctx the parse tree
@@ -156,6 +216,16 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNumero(atribuicaoParser.NumeroContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#booleano}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleano(atribuicaoParser.BooleanoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#booleano}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleano(atribuicaoParser.BooleanoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#id}.
 	 * @param ctx the parse tree
@@ -196,6 +266,76 @@ public interface atribuicaoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRightParen(atribuicaoParser.RightParenContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#leftChave}.
+	 * @param ctx the parse tree
+	 */
+	void enterLeftChave(atribuicaoParser.LeftChaveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#leftChave}.
+	 * @param ctx the parse tree
+	 */
+	void exitLeftChave(atribuicaoParser.LeftChaveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#rightChave}.
+	 * @param ctx the parse tree
+	 */
+	void enterRightChave(atribuicaoParser.RightChaveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#rightChave}.
+	 * @param ctx the parse tree
+	 */
+	void exitRightChave(atribuicaoParser.RightChaveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#plus}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlus(atribuicaoParser.PlusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#plus}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlus(atribuicaoParser.PlusContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#menus}.
+	 * @param ctx the parse tree
+	 */
+	void enterMenus(atribuicaoParser.MenusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#menus}.
+	 * @param ctx the parse tree
+	 */
+	void exitMenus(atribuicaoParser.MenusContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#div}.
+	 * @param ctx the parse tree
+	 */
+	void enterDiv(atribuicaoParser.DivContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#div}.
+	 * @param ctx the parse tree
+	 */
+	void exitDiv(atribuicaoParser.DivContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#mult}.
+	 * @param ctx the parse tree
+	 */
+	void enterMult(atribuicaoParser.MultContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#mult}.
+	 * @param ctx the parse tree
+	 */
+	void exitMult(atribuicaoParser.MultContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link atribuicaoParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpr(atribuicaoParser.ExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link atribuicaoParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpr(atribuicaoParser.ExprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link atribuicaoParser#expressao}.
 	 * @param ctx the parse tree
