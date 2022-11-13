@@ -2,9 +2,11 @@ grammar atribuicao;
 
 init: cmd+;
 
-cmd: cmdAtribui | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto | cmdSenao;
+cmd: cmdDeclara | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto | cmdSenao;
 
-cmdAtribui: tipo id operadorAtri (id|numero|texto|booleano) fim;
+cmdDeclara: (tipo id fim)| cmdAtribui;
+
+cmdAtribui:(tipo id operadorAtri (id|numero|texto|booleano) fim)|(id operadorAtri (id|numero|texto|booleano) fim);
 
 cmdLeia: 'leia(' id ')' complementoLeia fim;
 
@@ -33,10 +35,10 @@ compMaIgual: '>=';
 compDifer: '!=';
 numero: NUMINT | NUMFLOAT;
 NUMINT: [0-9]+;
-NUMFLOAT: [0-9]+ '.'? [0-9]+;
+NUMFLOAT: [0-9]+ '.' [0-9]+;
 booleano: BOOLEANOtrue|BOOLEANOfalse;
-BOOLEANOtrue:  'True';
-BOOLEANOfalse: 'False';
+BOOLEANOtrue:  'true';
+BOOLEANOfalse: 'false';
 id: ID;
 ID: [a-zA-Z0-9]+;
 texto: TEXTO; 
