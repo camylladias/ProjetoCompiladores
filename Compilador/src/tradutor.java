@@ -10,9 +10,10 @@
  * @author unifgversolato
  */
 import static java.lang.Integer.parseInt;
+import java.util.Arrays;
 import java.util.Dictionary;
+import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.List;
 
 
 public class tradutor  extends atribuicaoBaseListener{
@@ -118,18 +119,8 @@ public class tradutor  extends atribuicaoBaseListener{
         }else{
             tipo=ctx.tipo().getText();
         }
-        System.out.println("TIPOO"+tipo);
         switch(tipo){
           case "booleano":{
-               /* if (ctx.booleano()==null && ctx.id(1)==null){
-                     System.out.println("Tipo de dado invalido ao fazer a atribuicao");
-                }
-                if (ctx.booleano()!=null){
-                  checarConteudoBooleano(ctx.booleano().getText(),tipo,var_criada);
-                }if (ctx.id(1) !=null){
-                   checarTipovariaveisDeclaradas(ctx.id(0).getText(),ctx.id(1).getText(),tipo,var_criada);
-                }
-                break;*/
                 if (ctx.booleano()!=null){
                     if(checarConteudoInteiro(ctx.booleano().getText())){
                          DeclararVariavel(ctx.id(0).getText(),tipo,var_criada);
@@ -349,19 +340,29 @@ public class tradutor  extends atribuicaoBaseListener{
    
     
     @Override 
-    //FALTA VERFICAR SE OS TIPOS COMPARADOS SÃO IGUAIS
     public void enterCmdSe(atribuicaoParser.CmdSeContext ctx) { 
+        String[] tipos_variaveis_expressoes = null;
         for (int i=0;i<ctx.expressao().toArray().length;i++){
-            boolean var=VariavelDeclarada(ctx.expressao(i).getText());
+           boolean var=VariavelDeclarada(ctx.expressao(i).getText());
            if (var==false){
                System.out.println("Você está tentando comparar variavel que nao existe: "+ctx.expressao(i).getText());
-               break;
+               return;
+           }else{
+               tipos_variaveis_expressoes[i]=this.variaveis_declaradas.get(ctx.expressao(i).getText()).toString();
            }
         }
         
+        boolean tipos_diferentes = new HashSet<String>(Arrays.asList(tipos_variaveis_expressoes)).size()==1;
+        if(tipos_diferentes){
+            System.out.println("ERRO: Você está comparando tipos de dados diferentes");
+            return;
+        }else{
+            this.controle_tipo="if";
+            System.out.print(CaminharEspacos("if")+"if");
+        }
         
-        this.controle_tipo="if";
-        System.out.print(CaminharEspacos("if")+"if");
+        
+       
 
     }
     
@@ -373,7 +374,109 @@ public class tradutor  extends atribuicaoBaseListener{
     }
     
     @Override 
+    
+    public void enterExpr(atribuicaoParser.ExprContext ctx) { 
+        
+    }
+    
+    @Override 
+    public void exitCmdPara(atribuicaoParser.CmdParaContext ctx) { 
+        System.out.println("oiiiexit "+ctx.exception);
+    
+    }
+    @Override 
     public void enterCmdPara(atribuicaoParser.CmdParaContext ctx) { 
+        //cmdPara: 'para' leftParen tipo id operadorAtri numero fim id (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) numero fim expr rightParen leftChave cmd+ rightChave;
+        boolean numero_atribuido=checarConteudoInteiro(ctx.numero(0).getText());
+        boolean numero_comparativo=checarConteudoInteiro(ctx.numero(1).getText());
+        
+        //Verificação se os dois numeros enviados são inteiros
+        if ((numero_atribuido==false) ||(numero_comparativo==false)){
+            System.out.println("ERRO: os numeros digitados não correspondem com numeros inteiros.");
+            return;
+        }
+        
+        //Verificação se existe ou não o Id enviado e se o tipo de dado informado está correto
+        if ((VariavelDeclarada(ctx.id(0).getText())==false) &&("inteiro".equals(ctx.tipo().getText()))){
+            DeclararVariavel(ctx.id(0).getText(),ctx.tipo().getText(),false);
+        }else{
+            String tipo=this.variaveis_declaradas.get(ctx.id(0).getText()).toString();
+            if (!"inteiro".equals(tipo)){
+                System.out.println("ERRO: Você está tentando sobrescrever uma váriavel com o tipo diferente de inteiro");
+                return;
+            }
+        }
+        
+        //Verificar se os IDs enviados são os mesmos.
+        if(!ctx.id(0).getText().equals(ctx.id(1).getText())){
+            System.out.println("ERRO: Variavel esperada: "+ctx.id(0).getText()+",variavel encontrada: "+ctx.id(1).getText());
+            return;
+        }
+        
+        //Verificacao do contador
+         String contador_atribuicao=ctx.expr().id().getText();
+         
+         if (!contador_atribuicao.equals(ctx.id(0).getText())){
+            System.out.println("ERRO:a variavel que voce esta tentando atribuir é diferente da delcrada.");
+            return;
+         }else{
+             if (ctx.expr().expressao().termo().fator().id() != null){
+                 String contador_auto_atribuicao=ctx.expr().expressao().termo().fator().id().getText();
+                 if (!contador_auto_atribuicao.equals(ctx.id(0).getText())){
+                      System.out.println("ERRO:a variavel que voce esta tentando criar uma atribuicao é diferente da delcrada.");
+                      return;
+                 }else{
+                     if (ctx.expr().expressao().expreLinha().termo().fator().id() != null){
+                         String id=ctx.expr().expressao().expreLinha().termo().fator().id().getText();
+                          if (VariavelDeclarada(id)==false){
+                             System.out.println("ERRO:a variavel que voce esta tentando jogar na atribuicao nao esta definida.");
+                             return;
+                         }
+
+                         if (!"inteiro".equals(this.variaveis_declaradas.get(id).toString())){
+                            System.out.println("ERRO:a variavel que voce esta tentando jogar na atribuicao nao é do tipo inteiro.");
+                            return;
+                        } 
+                         
+                     }
+                     if (ctx.expr().expressao().termo().termoLinha().fator().id() !=null){
+                         String id=ctx.expr().expressao().termo().termoLinha().fator().id().getText();
+                         if (VariavelDeclarada(id)==false){
+                             System.out.println("ERRO:a variavel que voce esta tentando jogar na atribuicao nao esta definida.");
+                             return;
+                         }
+
+                         if (!"inteiro".equals(this.variaveis_declaradas.get(id).toString())){
+                            System.out.println("ERRO:a variavel que voce esta tentando jogar na atribuicao nao é do tipo inteiro.");
+                            return;
+                        } 
+                     }
+                     
+                     if(ctx.expr().expressao().expreLinha().termo().fator().numero() !=null){
+                         String id=ctx.expr().expressao().expreLinha().termo().fator().numero().getText();
+                         if (checarConteudoInteiro(id)==false){
+                             System.out.println("ERRO:O valor que voce esta tentando jogar na atribuicao nao é inteiro.");
+                             return;
+                         };
+                     }
+                     if(ctx.expr().expressao().termo().termoLinha().fator().numero() != null){
+                         String id=ctx.expr().expressao().termo().termoLinha().fator().numero().getText();
+                         if (checarConteudoInteiro(id)==false){
+                             System.out.println("ERRO:O valor que voce esta tentando jogar na atribuicao nao é inteiro.");
+                             return;
+                         };
+                     }
+                 }
+             }
+         }
+         
+         
+         
+         
+         
+         
+         
+            
         this.controle_tipo="for";
         //AumentarControleDicionario(this.controle_tipo);
         System.out.println(CaminharEspacos("for")+"for");
@@ -388,17 +491,15 @@ public class tradutor  extends atribuicaoBaseListener{
    
     @Override 
     public void enterCmdImprime(atribuicaoParser.CmdImprimeContext ctx) { 
-        //System.out.println(ctx.id());
         if (ctx.id()!=null){
-            //for (int i=0;i<ctx.id().toArray().length;i++){
                 boolean var=VariavelDeclarada(ctx.id().getText());
                 if (var==false){
                    System.out.println("Você está tentando imprimir uma variavel que nao existe: "+ctx.id().getText());
-                   //break;
+                   return;
                }
             }
         
-        System.out.print("      System.out.print");
+        System.out.print("      System.out.println");
     }
     
     @Override
