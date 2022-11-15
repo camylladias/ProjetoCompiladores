@@ -55,7 +55,7 @@ expr: id operadorAtri expressao;
 expressao: termo expreLinha;
 termo: fator termoLinha;
 expreLinha: plus termo expreLinha | menus termo expreLinha | |;
-fator: numero | id | leftParen expressao rightParen;
+fator: numero | id | texto | leftParen expressao rightParen;
 termoLinha: mult fator termoLinha | div fator termoLinha | |;
 
 Ws:[ \t\r\n]+ -> skip;
