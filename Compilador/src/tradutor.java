@@ -15,7 +15,7 @@ import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
 
-
+ 
 public class tradutor  extends atribuicaoBaseListener{
     String aux_tipo_scanner="";
     String controle_tipo="";
@@ -335,8 +335,29 @@ public class tradutor  extends atribuicaoBaseListener{
         
     }
     
+    //cmdEnquanto: 'enquanto' leftParen ((expr (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expr)| booleano) rightParen leftChave cmd+ rightChave;
+
  
-    
+    @Override 
+    public void enterCmdEnquanto(atribuicaoParser.CmdEnquantoContext ctx) {
+        if (ctx.expr(0)!= null && ctx.expr(1) != null){
+            //expr: id operadorAtri expressao;
+            if (ctx.expr(0).id()==null){
+                System.out.println("ERRO: Id nulo.");   
+            }else{
+                if (ctx.expr(0).expressao().termo().fator().numero()){
+                ctx.expr(0).expressao().termo().fator().numero();
+                ctx.expr(0).expressao().termo().fator().id();
+                ctx.expr(1).expressao().termo().fator().numero();
+                ctx.expr(1).expressao().termo().fator().id();
+            }
+            
+            
+        }
+        else if (ctx.booleano() != null && "true".equals(ctx.booleano().getText()) ){
+            
+        }
+    }
    
     
     @Override 
