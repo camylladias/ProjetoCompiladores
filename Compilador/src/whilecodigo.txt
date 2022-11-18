@@ -1,0 +1,27 @@
+ @Override 
+    public void enterCmdEnquanto(atribuicaoParser.CmdEnquantoContext ctx) {
+        if (ctx.expr(0)!= null && ctx.expr(1) != null){
+            //expr: id operadorAtri expressao;
+            if (ctx.expr(0).id()==null){
+                System.out.println("ERRO: Id nulo.");  
+		    return; 
+            }else{
+                if (ctx.expr(0).expressao().termo().fator().numero() != null or ){
+				String numero=ctx.expr(0).expressao().termo().fator().numero().getText();
+				if (checarConteudoInteiro(numero)==false){
+					System.out.println("ERRO: O número precisa ser inteiro."); 
+					return;
+				}
+			}
+               	
+                ctx.expr(0).expressao().termo().fator().id();
+                ctx.expr(1).expressao().termo().fator().numero();
+                ctx.expr(1).expressao().termo().fator().id();
+            }
+            
+            
+        }
+        else if (ctx.booleano() != null && "true".equals(ctx.booleano().getText()) ){
+            
+        }
+    }
