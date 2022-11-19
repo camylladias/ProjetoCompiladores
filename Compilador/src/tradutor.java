@@ -334,6 +334,21 @@ public class tradutor  extends atribuicaoBaseListener{
        }
         
     }
+ 
+    @Override 
+       public void enterComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx) { 
+          String tipo=this.aux_tipo_scanner;
+          if (tipo=="inteiro"){
+                System.out.print(" = scanner.nextInt()"); 
+           }else if(tipo=="flutuante"){
+                System.out.print(" = scanner.nextDouble()"); 
+           }else if (tipo=="palavra"){
+                System.out.print(" = scanner.nextLine()"); 
+           }   
+           else if(tipo=="booleano"){
+                System.out.print(" = scanner.nextBoolean()"); 
+           }
+       }
     
     //cmdEnquanto: 'enquanto' leftParen ((expr (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expr)| booleano) rightParen leftChave cmd+ rightChave;
 
@@ -576,20 +591,7 @@ public class tradutor  extends atribuicaoBaseListener{
         System.out.print("; \n");
     }
     
-    @Override 
-    public void enterComplementoLeia(atribuicaoParser.ComplementoLeiaContext ctx) { 
-       String tipo=this.aux_tipo_scanner;
-       if (tipo=="inteiro"){
-             System.out.print(" = scanner.nextInt()"); 
-        }else if(tipo=="flutuante"){
-             System.out.print(" = scanner.nextDouble()"); 
-        }else if (tipo=="palavra"){
-             System.out.print(" = scanner.nextLine()"); 
-        }   
-        else if(tipo=="booleano"){
-             System.out.print(" = scanner.nextBoolean()"); 
-        }
-    }
+    
     
     @Override
     public void exitPlus(atribuicaoParser.PlusContext ctx){
