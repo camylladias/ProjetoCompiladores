@@ -2,11 +2,11 @@ grammar atribuicao;
 
 init: cmd+;
 
-cmd: cmdDeclara | cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto | cmdSenao;
+cmd: cmdDeclara | cmdAtribui| cmdLeia| cmdImprime | cmdExpressao | cmdSe | cmdPara | cmdEnquanto | cmdSenao;
 
-cmdDeclara: (tipo id fim)| cmdAtribui;
+cmdDeclara: (tipo id fim) ;
 
-cmdAtribui:(tipo id operadorAtri (id|numero|texto|booleano) fim)|(id operadorAtri (id|numero|texto|booleano) fim);
+cmdAtribui:(tipo id operadorAtri (id|numero|texto|booleano) fim)| expr fim;
 
 cmdLeia: 'leia(' id ')' complementoLeia fim;
 
@@ -40,7 +40,7 @@ booleano: BOOLEANOtrue|BOOLEANOfalse;
 BOOLEANOtrue:  'true';
 BOOLEANOfalse: 'false';
 id: ID;
-ID: [a-zA-Z][a-zA-Z0-9]+;
+ID: [a-zA-Z0-9]+;
 texto: TEXTO; 
 TEXTO:'"' [a-zA-Z0-9]+ '"';
 leftParen: '(';
@@ -55,7 +55,7 @@ expr: id operadorAtri expressao;
 expressao: termo expreLinha;
 termo: fator termoLinha;
 expreLinha: plus termo expreLinha | menus termo expreLinha | |;
-fator: numero | id | texto | leftParen expressao rightParen;
+fator: numero | id | texto | booleano| leftParen expressao rightParen;
 termoLinha: mult fator termoLinha | div fator termoLinha | |;
 
 Ws:[ \t\r\n]+ -> skip;
