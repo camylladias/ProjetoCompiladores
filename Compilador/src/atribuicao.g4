@@ -22,7 +22,7 @@ cmdSenao: 'senao' leftChave cmd+ rightChave ;
 
 cmdPara: 'para' leftParen tipo id operadorAtri numero fim id (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) numero fim expr rightParen leftChave cmd+ rightChave;
 
-cmdEnquanto: 'enquanto' leftParen ((expr (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expr)| booleano) rightParen leftChave cmd+ rightChave;
+cmdEnquanto: 'enquanto' leftParen ((expressao (compIgual|compMaior|compMenor|compMeIgual|compMaIgual|compDifer) expressao)| booleano) rightParen leftChave cmd+ rightChave;
 
 tipo: 'booleano' | 'inteiro' | 'flutuante' | 'palavra';
 operadorAtri: '=';
