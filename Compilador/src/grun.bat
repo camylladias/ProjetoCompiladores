@@ -1,2 +1,2 @@
-SET CLASSPATH=.;C:\Users\dias_\Downloads\Comp\Comp\Comp\src\antlr-4.11.1-complete.jar;%CLASSPATH%
+SET CLASSPATH=.;C:\Users\dias_\Downloads\antlr4.jar;%CLASSPATH%
 java org.antlr.v4.gui.TestRig %*
