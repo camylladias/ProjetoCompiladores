@@ -14,6 +14,12 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import java.io.FileReader;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 
 public class Compilador {
@@ -25,9 +31,19 @@ public class Compilador {
         // TODO code application logic here
         //ler codigo -> passar para o lexico -> passar para o sintatico -> fazer
         //a taducao
-        System.out.println("Digite o seu codigo:");
+        String linha = "",path="",conteudo="";
+        System.out.println("Digite o path do arquivo:");
+        Scanner in = new Scanner(System.in);
+        path=System.getProperty("user.dir")+"\\entrada.txt";
+        BufferedReader buffRead = new BufferedReader(new FileReader(path));
+		while (linha!=null) {
+			linha = buffRead.readLine();
+            conteudo=conteudo+linha;
+		}
+		buffRead.close();
+        InputStream entradaStream = new ByteArrayInputStream(conteudo.getBytes());
         //fazer leitura do codigo do usuario
-        CharStream input = CharStreams.fromStream(System.in);
+        CharStream input = CharStreams.fromStream(entradaStream);
         // instanciar o analisar lexico
         atribuicaoLexer lexer = new atribuicaoLexer(input);
         // gerar os tokens
