@@ -5,3 +5,29 @@ x = (1+1)+a2;
 se(x == y){leia(x);} senao{imprime("teste");}
 para(x = 5; x>3;i++){leia(x);}
 enquanto( x > y){x = (1+1)+a2;}
+
+
+inteiro a; 
+inteiro b;
+inteiro c;
+flutuante d;
+imprime("Programa Teste");
+imprime("Digite A");
+leia(a);
+imprime("Digite B");
+leia(b);
+
+se(a<b)
+{
+c= a + b;
+}senao{
+c= a - b;
+}
+
+imprime("C e igual a ");
+imprime(c);
+
+d = c / (a + b);
+
+imprime("D e igual a ");
+imprime(d);
