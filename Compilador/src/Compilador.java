@@ -53,6 +53,7 @@ public class Compilador {
         ParseTreeWalker walker = new ParseTreeWalker();
         
         tradutor tr = new tradutor();
+       walker.walk(tr, tree);
        System.out.println("Encaminhando para impressão em arquivo")
        File file = new File(System.getProperty("user.dir")+"\\Codigo.java");
         PrintStream stream = new PrintStream(file);
