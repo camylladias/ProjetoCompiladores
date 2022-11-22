@@ -23,21 +23,22 @@ public class Compilador {
     public static void main(String[] args)throws IOException {
         // TODO code application logic here
         //ler codigo -> passar para o lexico -> passar para o sintatico -> fazer
-        //a taducao
-        String linha = "",path="",conteudo=" ";
-        System.out.println("Digite o path do arquivo:");
+        //a traducao
+        String linha = "",path="",conteudo="////inicio ";
         Scanner in = new Scanner(System.in);
         path=System.getProperty("user.dir")+"\\entrada.txt";
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		while (linha!=null) {
-			linha = buffRead.readLine();
-            conteudo=conteudo+linha;
-		}
-		buffRead.close();
-        if(conteudo==""){
-	System.out.print("conteudo nulo");
-	conteudo="erro na leitura de arquivo";
-	}
+        linha = buffRead.readLine();
+        if(linha!=null){
+            	conteudo=linha;
+	linha = buffRead.readLine();
+         }
+         while (linha!=null) {
+	conteudo=conteudo+linha;
+	conteudo=conteudo.replace("null","");
+	linha = buffRead.readLine();
+        }
+       buffRead.close();
         InputStream entradaStream = new ByteArrayInputStream(conteudo.getBytes());
         //fazer leitura do codigo do usuario
         CharStream inputC = CharStreams.fromStream(entradaStream);
@@ -52,7 +53,8 @@ public class Compilador {
         ParseTreeWalker walker = new ParseTreeWalker();
         
         tradutor tr = new tradutor();
-       File file = new File(System.getProperty("user.dir")+"\\teste.txt");
+       System.out.println("Encaminhando para impressão em arquivo")
+       File file = new File(System.getProperty("user.dir")+"\\Codigo.java");
         PrintStream stream = new PrintStream(file);
         System.setOut(stream);
         walker.walk(tr, tree);
