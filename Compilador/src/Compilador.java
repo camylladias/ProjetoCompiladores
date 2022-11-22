@@ -55,7 +55,7 @@ public class Compilador {
         tradutor tr = new tradutor();
        walker.walk(tr, tree);
        System.out.println("Encaminhando para impressão em arquivo")
-       File file = new File(System.getProperty("user.dir")+"\\Codigo.java");
+       File file = new File(System.getProperty("user.dir")+"\\Code.java");
         PrintStream stream = new PrintStream(file);
         System.setOut(stream);
         walker.walk(tr, tree);
