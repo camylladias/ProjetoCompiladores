@@ -18,12 +18,8 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.*;
 import Erros.Erros.CapturadorErros;
 //import org.antlr.v4.runtime.misc.Nullable;
-
-
 import java.util.*;
-
 //public class Compilador {
-
     /*
      * @param args the command line arguments
      */
@@ -77,7 +73,6 @@ import java.util.*;
         tradutor tr = new tradutor();
         walker.walk(tr, tree);
     }
-
    
 }*/
 
@@ -91,10 +86,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
 import org.antlr.v4.runtime.BaseErrorListener;
@@ -110,49 +102,31 @@ public class Compilador {
     {
         List<String> stack = ((Parser)recognizer).getRuleInvocationStack();
         Collections.reverse(stack);
-        System.out.println("System.out.println("+"\""+"ERRO: "+msg+"\""+");");
+        throw new RuntimeException("ERRO: Elemento faltante de acordo com a gramatica na "+"linha "+line+":"+charPositionInLine+": "+msg);
         }
     }
-    
+
     public static String LerArquivos(String nome_arquivo,Boolean Verif_tem_erro) throws FileNotFoundException, IOException{
         String linha = "",path="",conteudo="////inicio ";
         path=System.getProperty("user.dir")+nome_arquivo;
-        System.out.println(nome_arquivo);
+ 
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
         linha = buffRead.readLine();
         if(linha!=null){
             conteudo=linha;
-            conteudo=conteudo.replace("null","");
             linha = buffRead.readLine();
         }
         while (linha!=null) {
             conteudo=conteudo+linha;
             conteudo=conteudo.replace("null","");
             linha = buffRead.readLine();
-            if (Verif_tem_erro==true && linha.contains("ERRO")){
-                buffRead.close();
-                return linha;
-            }
+            
         }
        buffRead.close();
        return conteudo;
     }
-    
-    public static void popularArquivo(){
-        
-    }
-    
-    public static void DesenharMain(String erro){
-        System.out.println("import java.util.Scanner;");
-            System.out.println("public class Code{");
-            System.out.println("    public static void main(String[] args){");
-            System.out.println(erro);
-            System.out.println("    }");
-            System.out.println("}");
-            
-    }
-    
-    
+
+
     public static void main(String[] args)throws IOException {
        String conteudo;
        conteudo=LerArquivos("\\entrada.txt",false);
@@ -171,70 +145,6 @@ public class Compilador {
        // andar sobre a arvore de derivacao
        ParseTreeWalker walker = new ParseTreeWalker();
        tradutor tr = new tradutor();
-       //Verificando se o arquivo existe.
-        System.out.println("Encaminhando para impressao em arquivo");
-        File file = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
-        boolean code_txt = Files.exists(file.toPath());  
-        if (code_txt==true){
-            PrintStream stream = new PrintStream(file);
-            System.setOut(stream);
-            walker.walk(tr, tree);
-            stream.close();
-            String erro=LerArquivos("\\saida\\Code.java",true);
-            File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
-            PrintStream stream2 = new PrintStream(file_java);
-            System.setOut(stream2);
-            DesenharMain(erro);
-           
-            stream.close();
-        }else{
-            String erro=LerArquivos("\\saida\\Code.java",true);
-            File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
-            PrintStream stream = new PrintStream(file_java);
-            System.setOut(stream);
-            DesenharMain(erro);
-           
-            stream.close();
-            }
-        
-         File file2 = new File(System.getProperty("user.dir")+"\\saida\\Janela.java");
-         PrintStream stream2 = new PrintStream(file2);
-         System.setOut(stream2);
-         
-         BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\Interface1.txt"));
-         String currentLine = reader.readLine();
-         while (currentLine!=null) {
-	         System.out.println(currentLine);
-	         currentLine = reader.readLine();
-         }
-         reader.close();
-         
-         BufferedReader reader3 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\saida\\Code.java"));
-         String currentLineC = reader3.readLine();
-         while (currentLineC!=null) {
-	         System.out.println(currentLine);
-	         currentLineC = reader3.readLine();
-         }
-         reader.close();
-         
-         System.out.print('"'+"); \n jTextArea2.setText("+'"');
-         BufferedReader reader2 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\Interface2.txt"));
-         String currentLine2 = reader.readLine();
-         while (currentLine2!=null) {
-	         System.out.println(currentLine);
-	         currentLine2 = reader.readLine();
-         }
-         reader.close();
-
+       walker.walk(tr, tree);
     }
-    
-    
-        }
-        
-        
-    
-
-  
-
-    
-
+}    

@@ -16,6 +16,7 @@ import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+ 
 
 public class tradutor  extends atribuicaoBaseListener{    
     String aux_tipo_scanner="";
@@ -86,14 +87,14 @@ public class tradutor  extends atribuicaoBaseListener{
     public String checarTipovariaveisDeclaradas(String id_atribuicao,String id_atribuida, String tipo,Boolean declarada){
         boolean var_declarada=VariavelDeclarada(id_atribuida);
         if (var_declarada==false){
-            System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando atribuir valor de uma variavel inexistente."+"\""+");");
-            return "ERRO";
+            //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando atribuir valor de uma variavel inexistente."+"\""+");");
+            throw new RuntimeException("ERRO: Voce esta tentando atribuir valor de uma variavel inexistente.");
         }else{
             String tipo_atribuida=this.variaveis_declaradas.get(id_atribuida).toString();
                 if (!tipo_atribuida.equals(tipo) & !tipo.equals("flutuante") & !tipo_atribuida.equals("inteiro")){
-      
-                    System.out.println("System.out.println("+"\""+"ERRO: Os tipos de atribuicoes sao diferentes. Tipo esperado -> "+tipo+"\""+"\""+", tipo fornecido ->"+tipo_atribuida+"\""+");");
-                    return "ERRO";
+                    
+                    //System.out.println("System.out.println("+"\""+"ERRO: Os tipos de atribuicoes sao diferentes. Tipo esperado -> "+tipo+"\""+"\""+", tipo fornecido ->"+tipo_atribuida+"\""+");");
+                    throw new RuntimeException("ERRO: Os tipos de atribuicoes sao diferentes. Tipo esperado -> "+tipo+", tipo fornecido ->"+tipo_atribuida);
                 }else{
                     return "OK";
                 }
@@ -102,41 +103,39 @@ public class tradutor  extends atribuicaoBaseListener{
     
     public Boolean Checar_Var_Com_Multiplos_Conteudos(String variavel_expr,String conteudo,String tipo_var_expr,Boolean expr_criada){
         if (conteudo.contains("\"") && !"palavra".equals(tipo_var_expr)){
-            System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir uma string numa variavel do tipo -> "+tipo_var_expr+"\""+"\""+". String -> "+conteudo+"\""+");");
-            return true;
+            //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir uma string numa variavel do tipo -> "+tipo_var_expr+"\""+"\""+". String -> "+conteudo+"\""+");");
+            throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+". String -> "+conteudo);
         }else if(conteudo.contains("\"") &&"palavra".equals(tipo_var_expr)){
            if (checarConteudoPalavra(conteudo)==false){
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de ->"+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
-                    return true;
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de ->"+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+". Valor -> "+conteudo);
                 }
             
         }else if (isDigit(conteudo)==true){
             if (tipo_var_expr.equals("inteiro")){
                 if (checarConteudoInteiro(conteudo)==false){
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
-
-                    return true;
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+". Valor -> "+conteudo);
                 }
             }
             
             if (tipo_var_expr.equals("flutuante")){
                 if (checarConteudoFlutuante(conteudo)==false){
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
-                    return true;
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+". Valor -> "+conteudo);
                 }
             }
             if (tipo_var_expr.equals("palavra") ||tipo_var_expr.equals("booleano")){
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
-                    return true;
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+"\""+"\""+". Valor -> "+conteudo+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de -> "+tipo_var_expr+". Valor -> "+conteudo);
                 
             }
             
         }else {
             String retorno_tipo=checarTipovariaveisDeclaradas(variavel_expr,conteudo,tipo_var_expr,expr_criada);
             if (retorno_tipo.equals("ERRO")){
-                System.out.println("System.out.println("+"\""+"ERRO: O tipo da variavel que sendo atribuida é diferente de -> "+tipo_var_expr+"\""+"\""+". ID ->"+conteudo+"\""+");");
-
-                return true;
+                //System.out.println("System.out.println("+"\""+"ERRO: O tipo da variavel que sendo atribuida é diferente de -> "+tipo_var_expr+"\""+"\""+". ID ->"+conteudo+"\""+");");
+                throw new RuntimeException("ERRO: O tipo da variavel que sendo atribuida é diferente de -> "+tipo_var_expr+". ID ->"+conteudo);
             }
         } 
        return false; 
@@ -144,7 +143,8 @@ public class tradutor  extends atribuicaoBaseListener{
    
     public void checarTipoDadosComparacoes(ArrayList tipos_variaveis_expressao_0,ArrayList tipos_variaveis_expressao_1){
         if ((tipos_variaveis_expressao_0.get(0)).equals(tipos_variaveis_expressao_1.get(0))==false){
-            System.out.println("System.out.println("+"\""+"ERRO: Voce esta comparando tipos de dados diferentes. Tipos encontrados: "+tipos_variaveis_expressao_0.get(0)+"\""+"\""+", "+tipos_variaveis_expressao_1.get(0)+"\""+");");
+            throw new RuntimeException("ERRO: Voce esta comparando tipos de dados diferentes. Tipos encontrados: "+tipos_variaveis_expressao_0.get(0)+", "+tipos_variaveis_expressao_1.get(0));
+            //System.out.println("System.out.println("+"\""+"ERRO: Voce esta comparando tipos de dados diferentes. Tipos encontrados: "+tipos_variaveis_expressao_0.get(0)+"\""+"\""+", "+tipos_variaveis_expressao_1.get(0)+"\""+");");
             }
     }
             
@@ -165,7 +165,8 @@ public class tradutor  extends atribuicaoBaseListener{
                         tipos_variaveis_expressao_0.add("palavra");
                     }else{
                         if (VariavelDeclarada(conteudo_0)==false){
-                            System.out.println("System.out.println("+"\""+"ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_0+"\""+");");                      
+                            throw new RuntimeException("ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_0);
+                            //System.out.println("System.out.println("+"\""+"ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_0+"\""+");");                      
                             
                         }else{
                             String tipo_var=this.variaveis_declaradas.get(conteudo_0).toString();
@@ -177,7 +178,8 @@ public class tradutor  extends atribuicaoBaseListener{
         
         boolean tipos_diferentes_expr0 = new HashSet<String>(tipos_variaveis_expressao_0).size()==1;
         if(tipos_diferentes_expr0==false){
-            System.out.println("System.out.println("+"\""+"ERRO:Voce esta comparando tipos de dados diferentes "+"\""+");");
+            throw new RuntimeException("ERRO:Voce esta comparando tipos de dados diferentes ");
+            //System.out.println("System.out.println("+"\""+"ERRO:Voce esta comparando tipos de dados diferentes "+"\""+");");
             
         }
         return tipos_variaveis_expressao_0;
@@ -197,7 +199,8 @@ public class tradutor  extends atribuicaoBaseListener{
                     tipos_variaveis_expressao_1.add("palavra");
                 }else{
                     if (VariavelDeclarada(conteudo_1)==false){
-                        System.out.println("System.out.println("+"\""+"ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_1+"\""+");");                        
+                        throw new RuntimeException("ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_1);
+                        //System.out.println("System.out.println("+"\""+"ERRO: A variavel informada na expressao nao foi declarada -> "+conteudo_1+"\""+");");                        
                     }else{
                         String tipo_var=this.variaveis_declaradas.get(conteudo_1).toString();
                         tipos_variaveis_expressao_1.add(tipo_var);
@@ -207,7 +210,8 @@ public class tradutor  extends atribuicaoBaseListener{
         }
         boolean tipos_diferentes_expr1 = new HashSet<String>(tipos_variaveis_expressao_1).size()==1;
         if(tipos_diferentes_expr1==false){
-            System.out.println("System.out.println("+"\""+"ERRO:Voce esta comparando tipos de dados diferentes "+"\""+");");
+            throw new RuntimeException("ERRO:Voce esta comparando tipos de dados diferentes ");
+            //System.out.println("System.out.println("+"\""+"ERRO:Voce esta comparando tipos de dados diferentes "+"\""+");");
 
             
         }
@@ -233,7 +237,8 @@ public class tradutor  extends atribuicaoBaseListener{
                     if(checarConteudoBooleano(ctx.booleano().getText())==true){
                          DeclararVariavel(ctx.id(0).getText(),tipo,var_criada);
                     }else{
-                        System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor -> "+ctx.booleano().getText()+"\""+");");
+                        throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor -> "+ctx.booleano().getText());
+                        //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor -> "+ctx.booleano().getText()+"\""+");");
                 }
                   }else if (ctx.id(1) !=null){
                       String retorno=checarTipovariaveisDeclaradas(ctx.id(0).getText(),ctx.id(1).getText(),tipo,var_criada);
@@ -243,7 +248,8 @@ public class tradutor  extends atribuicaoBaseListener{
                       
                    }
                   else if (conteudo_expr !=null && conteudo_expr.length>1){
-                      System.out.println("System.out.println("+"\""+"ERRO: Variaveis do tipo booleano suportam apenas um valor de atribuicao."+"\""+");");
+                      throw new RuntimeException("ERRO: Variaveis do tipo booleano suportam apenas um valor de atribuicao.");
+                      //System.out.println("System.out.println("+"\""+"ERRO: Variaveis do tipo booleano suportam apenas um valor de atribuicao."+"\""+");");
 
                   
                   }else if (conteudo_expr !=null && conteudo_expr.length==1){
@@ -252,13 +258,15 @@ public class tradutor  extends atribuicaoBaseListener{
                                 if(checarConteudoBooleano(conteudo)==true){
                                     DeclararVariavel(ctx.expr().id().getText(),tipo,var_criada);
                                 }else{
-                                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor ->"+conteudo+"\""+");");
+                                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor ->"+conteudo);
+                                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de booleano. Valor ->"+conteudo+"\""+");");
                                 }
                             }    
                         }
                   
                   }else{
-                       System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
+                      throw new RuntimeException("ERRO: Tipo de dado invalido ao fazer a atribuicao.");
+                       //System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
                   }
                    break;
                  }
@@ -268,7 +276,8 @@ public class tradutor  extends atribuicaoBaseListener{
                 if(checarConteudoInteiro(ctx.numero().getText())==true){
                    DeclararVariavel(ctx.id(0).getText(),tipo,var_criada);
                 }else{
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de inteiro. Valor ->"+ctx.numero().getText()+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de inteiro. Valor ->"+ctx.numero().getText());
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de inteiro. Valor ->"+ctx.numero().getText()+"\""+");");
                 }
             }else if (ctx.id(1) !=null){
                 String declarar=checarTipovariaveisDeclaradas(ctx.id(0).getText(),ctx.id(1).getText(),tipo,var_criada);
@@ -287,7 +296,8 @@ public class tradutor  extends atribuicaoBaseListener{
                 }
             }
             else{
-               System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
+                throw new RuntimeException("ERRO: Tipo de dado invalido ao fazer a atribuicao.");
+               //System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
                
             }
              break;
@@ -297,7 +307,8 @@ public class tradutor  extends atribuicaoBaseListener{
                 if(checarConteudoFlutuante(ctx.numero().getText())==true){
                    DeclararVariavel(ctx.id(0).getText(),tipo,var_criada);
                 }else{
-                    System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de flutuante. Valor -> "+ctx.numero().getText()+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de flutuante. Valor -> "+ctx.numero().getText());
+                    //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de flutuante. Valor -> "+ctx.numero().getText()+"\""+");");
                 }
             }else if (ctx.id(1) !=null){
                 String declarar=checarTipovariaveisDeclaradas(ctx.id(0).getText(),ctx.id(1).getText(),tipo,var_criada);
@@ -316,7 +327,8 @@ public class tradutor  extends atribuicaoBaseListener{
                 }
             }
             else{
-               System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao. "+"\""+");");
+                throw new RuntimeException("ERRO: Tipo de dado invalido ao fazer a atribuicao. ");
+               //System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao. "+"\""+");");
             }
              break;
             }
@@ -325,7 +337,8 @@ public class tradutor  extends atribuicaoBaseListener{
                 if(checarConteudoPalavra(ctx.texto().getText())==true){
                    DeclararVariavel(ctx.id(0).getText(),tipo,var_criada);
                 }else{
-                System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de palavra. Valor -> "+ctx.texto().getText()+"\""+");");
+                    throw new RuntimeException("ERRO: Voce esta tentando inserir um valor com um tipo diferente de palavra. Valor -> "+ctx.texto().getText());
+                //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando inserir um valor com um tipo diferente de palavra. Valor -> "+ctx.texto().getText()+"\""+");");
                 }
             }else if (ctx.id(1) !=null){
                 
@@ -345,8 +358,9 @@ public class tradutor  extends atribuicaoBaseListener{
                 }
             }
             else{
+                throw new RuntimeException("ERRO: Tipo de dado invalido ao fazer a atribuicao.");
     
-               System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
+               //System.out.println("System.out.println("+"\""+"ERRO: Tipo de dado invalido ao fazer a atribuicao."+"\""+");");
 
             }
              break;
@@ -376,7 +390,8 @@ public class tradutor  extends atribuicaoBaseListener{
     public void enterCmdLeia(atribuicaoParser.CmdLeiaContext ctx) { 
        boolean var=VariavelDeclarada(ctx.id().getText());
        if (var==false){
-           System.out.println("System.out.println("+"\""+"ERRO: A variavel que voce esta tentando ler nao foi declarada ainda."+"\""+");");
+           throw new RuntimeException("ERRO: A variavel que voce esta tentando ler nao foi declarada ainda.");
+           //System.out.println("System.out.println("+"\""+"ERRO: A variavel que voce esta tentando ler nao foi declarada ainda."+"\""+");");
        }else{
         this.variaveis_declaradas.get(ctx.id().getText());
         String tipo=this.variaveis_declaradas.get(ctx.id().getText()).toString();
@@ -418,7 +433,8 @@ public class tradutor  extends atribuicaoBaseListener{
         if (ctx.expressao(0)!= null && ctx.expressao(1) != null){
             //expr: id operadorAtri expressao;
             if (ctx.expressao(0)==null || ctx.expressao(1)==null) {
-                System.out.println("System.out.println("+"\""+"ERRO: Id nulo."+"\""+");");
+                //System.out.println("System.out.println("+"\""+"ERRO: Id nulo."+"\""+");");
+                throw new RuntimeException("ERRO: Id nulo.");
             }else{
                 for (int i=0;i<ctx.expressao(0).depth();i++){
                     conteudo_expr_0=ctx.expressao(0).getText().split("\\(|\\)|\\+|\\-|\\/|\\*"); 
@@ -433,10 +449,12 @@ public class tradutor  extends atribuicaoBaseListener{
                 
             }
         }else if (ctx.booleano() != null && "false".equals(ctx.booleano().getText().toLowerCase()) ){
-            System.out.println("System.out.println("+"\""+"ERRO: Nao é possivel o controle ser falso. Valor enviado ->  "+ctx.booleano().getText().toLowerCase()+"\""+");");
+            //System.out.println("System.out.println("+"\""+"ERRO: Nao é possivel o controle ser falso. Valor enviado ->  "+ctx.booleano().getText().toLowerCase()+"\""+");");
+            throw new RuntimeException("ERRO: Nao é possivel o controle ser falso. Valor enviado ->"+ctx.booleano().getText().toLowerCase());
         }
         else{
-            System.out.println("System.out.println("+"\""+"ERRO: A expressao enviada nao é valida."+"\""+");");
+            //System.out.println("System.out.println("+"\""+"ERRO: A expressao enviada nao é valida."+"\""+");");
+            throw new RuntimeException("ERRO: A expressao enviada nao é valida.");
             
             
         }
@@ -451,7 +469,8 @@ public class tradutor  extends atribuicaoBaseListener{
         String [] conteudo_expr_0=null;
         String [] conteudo_expr_1=null;
          if (ctx.expressao(0)==null || ctx.expressao(1)==null) {
-                System.out.println("System.out.println("+"\""+"ERRO: Id nulo."+"\""+");");
+                //System.out.println("System.out.println("+"\""+"ERRO: Id nulo."+"\""+");");
+                throw new RuntimeException("ERRO: Id nulo.");
             }else{
                 for (int i=0;i<ctx.expressao(0).depth();i++){
                     conteudo_expr_0=ctx.expressao(0).getText().split("\\(|\\)|\\+|\\-|\\/|\\*"); 
@@ -497,8 +516,8 @@ public class tradutor  extends atribuicaoBaseListener{
         
         //Verificação se os dois numeros enviados são inteiros
         if ((numero_atribuido==false) ||(numero_comparativo==false)){
-            System.out.println("System.out.println("+"\""+"ERRO: Algum dos numeros digitados nao correspondem com numeros inteiros. "+numero_atribuido+numero_comparativo+"\""+");");
-
+            //System.out.println("System.out.println("+"\""+"ERRO: Algum dos numeros digitados nao correspondem com numeros inteiros. "+numero_atribuido+numero_comparativo+"\""+");");
+            throw new RuntimeException("ERRO: Algum dos numeros digitados nao correspondem com numeros inteiros. "+numero_atribuido+numero_comparativo);
         }
         
         //Verificação se existe ou não o Id enviado e se o tipo de dado informado está correto
@@ -507,37 +526,43 @@ public class tradutor  extends atribuicaoBaseListener{
         }else{
             String tipo=this.variaveis_declaradas.get(ctx.id(0).getText()).toString();
             if (!"inteiro".equals(tipo)){
-                System.out.println("System.out.println("+"\""+"ERRO: Você está tentando sobrescrever uma variavel com o tipo diferente de inteiro. Tipo encontrado -> "+tipo+"\""+");");
+                throw new RuntimeException("ERRO: Você está tentando sobrescrever uma variavel com o tipo diferente de inteiro. Tipo encontrado -> "+tipo);
+                //System.out.println("System.out.println("+"\""+"ERRO: Você está tentando sobrescrever uma variavel com o tipo diferente de inteiro. Tipo encontrado -> "+tipo+"\""+");");
             }
         }
         
         //Verificar se os IDs enviados são os mesmos.
         if(!ctx.id(0).getText().equals(ctx.id(1).getText())){
-            System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+"\""+"\""+", variavel encontrada -> "+ctx.id(1).getText()+"\""+");");
+            throw new RuntimeException("ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+", variavel encontrada -> "+ctx.id(1).getText());
+            //System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+"\""+"\""+", variavel encontrada -> "+ctx.id(1).getText()+"\""+");");
 
         }
          
         //Verificacao do contador
         String contador_atribuicao=ctx.expr().id().getText();
         if (!contador_atribuicao.equals(ctx.id(0).getText())){
-            System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+"\""+"\""+", variavel encontrada -> "+contador_atribuicao+"\""+");");
+            throw new RuntimeException("ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+", variavel encontrada -> "+contador_atribuicao+");");
+            //System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta indicando como o contador difere da declarada. Variavel esperada ->"+ctx.id(0).getText()+"\""+"\""+", variavel encontrada -> "+contador_atribuicao+"\""+");");
         }else{
             for (int i=0;i<ctx.expr().depth();i++){
                 conteudo_expr=ctx.expr().expressao().getText().split("\\(|\\)|\\+|\\-|\\/|\\*"); 
             }
             int tamanho_expressao = conteudo_expr.length;
             if (tamanho_expressao>2){
-                System.out.println("System.out.println("+"\""+"ERRO: A expressão aceita 2 parametros. Tamanho encontrado:  "+tamanho_expressao+"\""+");");
+                throw new RuntimeException("ERRO: A expressão aceita 2 parametros. Tamanho encontrado:  "+tamanho_expressao);
+                //System.out.println("System.out.println("+"\""+"ERRO: A expressão aceita 2 parametros. Tamanho encontrado:  "+tamanho_expressao+"\""+");");
             }else{
                 for (int i=0;i<conteudo_expr.length;i++){
                     if (checarConteudoPalavra(conteudo_expr[i])==true){
-                        System.out.println("System.out.println("+"\""+"ERRO: Nao pode passar uma string para o contador ->  "+conteudo_expr[i]+"\""+");");
+                        throw new RuntimeException("ERRO: Nao pode passar uma string para o contador ->  "+conteudo_expr[i]);
+                        //System.out.println("System.out.println("+"\""+"ERRO: Nao pode passar uma string para o contador ->  "+conteudo_expr[i]+"\""+");");
                     }else if (isDigit(conteudo_expr[i])==true && checarConteudoInteiro(conteudo_expr[i]) !=true ){
-                        System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta tentando jogar na atribuicao nao é do tipo inteiro -> "+conteudo_expr[i]+"\""+");");
+                        throw new RuntimeException("ERRO:a variavel que voce esta tentando jogar na atribuicao nao é do tipo inteiro -> "+conteudo_expr[i]);
+                        //System.out.println("System.out.println("+"\""+"ERRO:a variavel que voce esta tentando jogar na atribuicao nao é do tipo inteiro -> "+conteudo_expr[i]+"\""+");");
                     }else {
                         Boolean houve_erro=Checar_Var_Com_Multiplos_Conteudos(contador_atribuicao,conteudo_expr[i],"inteiro", true);
                         if(houve_erro==true){
-                            System.exit(0);
+                            //System.exit(0);
                         }
                     }
                 }                    
@@ -554,7 +579,8 @@ public class tradutor  extends atribuicaoBaseListener{
         if (ctx.id()!=null){
                 boolean var=VariavelDeclarada(ctx.id().getText());
                 if (var==false){
-                   System.out.println("System.out.println("+"\""+"Você está tentando imprimir uma variavel que nao existe ->  "+ctx.id().getText()+"\""+");");
+                    throw new RuntimeException("Você está tentando imprimir uma variavel que nao existe ->  "+ctx.id().getText());
+                   //System.out.println("System.out.println("+"\""+"Você está tentando imprimir uma variavel que nao existe ->  "+ctx.id().getText()+"\""+");");
                }
             }
         System.out.print("      System.out.println");
@@ -584,8 +610,8 @@ public class tradutor  extends atribuicaoBaseListener{
               this.controle_tipo="String";
               break;
           default:  
-           System.out.println("System.out.println("+"\""+"ERRO: O tipo de variavel difere de um tipo valido -> "+tipo+"\""+");");
-    
+           //System.out.println("System.out.println("+"\""+"ERRO: O tipo de variavel difere de um tipo valido -> "+tipo+"\""+");");
+              throw new RuntimeException("ERRO: O tipo de variavel difere de um tipo valido -> "+tipo);
         }
   }
     @Override 
@@ -702,10 +728,11 @@ public class tradutor  extends atribuicaoBaseListener{
     
     @Override 
     
-    public void enterCmdDeclara(atribuicaoParser.CmdDeclaraContext ctx){
+    public void enterCmdDeclara(atribuicaoParser.CmdDeclaraContext ctx) {
         if (ctx.id()!=null){
             if (VariavelDeclarada(ctx.id().getText())==true){
-                System.out.println("System.out.println("+"\""+"ERRO: O nome da variavel informada ja existe. ->"+ctx.id().getText()+"\""+");");
+                //System.out.println("System.out.println("+"\""+"ERRO: O nome da variavel informada ja existe. ->"+ctx.id().getText()+"\""+");");
+                 throw new RuntimeException("ERRO: O nome da variavel informada ja existe. ->"+ctx.id().getText()); 
             }else{
                 DeclararVariavel(ctx.id().getText(),ctx.tipo().getText(),false);
             }
@@ -719,14 +746,16 @@ public class tradutor  extends atribuicaoBaseListener{
      
        if (ctx.tipo() == null){
             if (VariavelDeclarada(ctx.expr().id().getText())==false){
-                System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando atribuir valor a uma variavel que nao foi declarada -> "+ctx.expr().id().getText()+"\""+");");
+                //System.out.println("System.out.println("+"\""+"ERRO: Voce esta tentando atribuir valor a uma variavel que nao foi declarada -> "+ctx.expr().id().getText()+"\""+");");
+                throw new RuntimeException("ERRO: Voce esta tentando atribuir valor a uma variavel que nao foi declarada -> "+ctx.expr().id().getText());
             }
            ChecarTipodeDados(ctx,true); 
        }else{
             if (VariavelDeclarada(ctx.id(0).getText())==false){
                ChecarTipodeDados(ctx,false);
             }else{
-                System.out.println("System.out.println("+"\""+"ERRO: O nome da variavel informada ja existe ->"+ctx.id(0).getText()+"\""+");");
+                throw new RuntimeException("ERRO: O nome da variavel informada ja existe ->"+ctx.id(0).getText());
+                //System.out.println("System.out.println("+"\""+"ERRO: O nome da variavel informada ja existe ->"+ctx.id(0).getText()+"\""+");");
             }
        } 
      }
