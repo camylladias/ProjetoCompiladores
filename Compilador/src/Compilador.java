@@ -122,6 +122,7 @@ public class Compilador {
         linha = buffRead.readLine();
         if(linha!=null){
             conteudo=linha;
+            conteudo=conteudo.replace("null","");
             linha = buffRead.readLine();
         }
         while (linha!=null) {
@@ -170,12 +171,11 @@ public class Compilador {
        // andar sobre a arvore de derivacao
        ParseTreeWalker walker = new ParseTreeWalker();
        tradutor tr = new tradutor();
-       walker.walk(tr, tree);
        //Verificando se o arquivo existe.
         System.out.println("Encaminhando para impressao em arquivo");
         File file = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
         boolean code_txt = Files.exists(file.toPath());  
-        if (code_txt==false){
+        if (code_txt==true){
             PrintStream stream = new PrintStream(file);
             System.setOut(stream);
             walker.walk(tr, tree);
