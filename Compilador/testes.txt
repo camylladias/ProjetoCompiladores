@@ -2,6 +2,7 @@ inteiro a;
 inteiro b;
 inteiro c;
 flutuante d;
+booleano e =true;
 imprime("Programa Teste");
 imprime("Digite A");
 leia(a);
@@ -19,7 +20,7 @@ para(inteiro i=0;i<5;i=i+1){
 imprime(i);
 }
 
-enquanto(b>a){
+enquanto(a<b-2){
 a=a+1;
 imprime(a);
 }
