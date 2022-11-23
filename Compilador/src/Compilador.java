@@ -173,7 +173,7 @@ public class Compilador {
        walker.walk(tr, tree);
        //Verificando se o arquivo existe.
         System.out.println("Encaminhando para impressao em arquivo");
-        File file = new File(System.getProperty("user.dir")+"\\Code.txt");
+        File file = new File(System.getProperty("user.dir")+"\\saida\\Code.txt");
         boolean code_txt = Files.exists(file.toPath());  
         if (code_txt==false){
             PrintStream stream = new PrintStream(file);
@@ -181,7 +181,7 @@ public class Compilador {
             walker.walk(tr, tree);
             stream.close();
             String erro=LerArquivos("\\Code.txt",true);
-            File file_java = new File(System.getProperty("user.dir")+"\\Code.java");
+            File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream2 = new PrintStream(file_java);
             System.setOut(stream2);
             DesenharMain(erro);
@@ -189,7 +189,7 @@ public class Compilador {
             stream.close();
         }else{
             String erro=LerArquivos("\\Code.txt",true);
-            File file_java = new File(System.getProperty("user.dir")+"\\Code.java");
+            File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream = new PrintStream(file_java);
             System.setOut(stream);
             DesenharMain(erro);
@@ -197,6 +197,38 @@ public class Compilador {
             stream.close();
             }
         }
+         File file2 = new File(System.getProperty("user.dir")+"\\saida\\Janela.java");
+         PrintStream stream2 = new PrintStream(file2);
+         System.setOut(stream2);
+         
+         BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\Interface1.txt"));
+         String currentLine = reader.readLine();
+         while (currentLine!=null) {
+	         System.out.println(currentLine);
+	         currentLine = reader.readLine();
+         }
+         reader.close();
+         
+         BufferedReader reader3 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\saida\\Code.java"));
+         String currentLineC = reader3.readLine();
+         while (currentLineC!=null) {
+	         System.out.println(currentLine);
+	         currentLineC = reader3.readLine();
+         }
+         reader.close();
+         
+         System.out.print('"'+"); \n jTextArea2.setText("+'"');
+         BufferedReader reader2 = new BufferedReader(new FileReader(System.getProperty("user.dir")+"\\Interface2.txt"));
+         String currentLine2 = reader.readLine();
+         while (currentLine2!=null) {
+	         System.out.println(currentLine);
+	         currentLine2 = reader.readLine();
+         }
+         reader.close();
+
+    }
+    
+    
         }
         
         
