@@ -173,14 +173,14 @@ public class Compilador {
        walker.walk(tr, tree);
        //Verificando se o arquivo existe.
         System.out.println("Encaminhando para impressao em arquivo");
-        File file = new File(System.getProperty("user.dir")+"\\saida\\Code.txt");
+        File file = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
         boolean code_txt = Files.exists(file.toPath());  
         if (code_txt==false){
             PrintStream stream = new PrintStream(file);
             System.setOut(stream);
             walker.walk(tr, tree);
             stream.close();
-            String erro=LerArquivos("\\saida\\Code.txt",true);
+            String erro=LerArquivos("\\saida\\Code.java",true);
             File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream2 = new PrintStream(file_java);
             System.setOut(stream2);
@@ -188,7 +188,7 @@ public class Compilador {
            
             stream.close();
         }else{
-            String erro=LerArquivos("\\saida\\Code.txt",true);
+            String erro=LerArquivos("\\saida\\Code.java",true);
             File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream = new PrintStream(file_java);
             System.setOut(stream);
