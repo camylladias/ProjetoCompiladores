@@ -180,7 +180,7 @@ public class Compilador {
             System.setOut(stream);
             walker.walk(tr, tree);
             stream.close();
-            String erro=LerArquivos("\\Code.txt",true);
+            String erro=LerArquivos("\\saida\\Code.txt",true);
             File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream2 = new PrintStream(file_java);
             System.setOut(stream2);
@@ -188,7 +188,7 @@ public class Compilador {
            
             stream.close();
         }else{
-            String erro=LerArquivos("\\Code.txt",true);
+            String erro=LerArquivos("\\saida\\Code.txt",true);
             File file_java = new File(System.getProperty("user.dir")+"\\saida\\Code.java");
             PrintStream stream = new PrintStream(file_java);
             System.setOut(stream);
@@ -196,7 +196,7 @@ public class Compilador {
            
             stream.close();
             }
-        }
+        
          File file2 = new File(System.getProperty("user.dir")+"\\saida\\Janela.java");
          PrintStream stream2 = new PrintStream(file2);
          System.setOut(stream2);
@@ -237,5 +237,4 @@ public class Compilador {
   
 
     
-
 
